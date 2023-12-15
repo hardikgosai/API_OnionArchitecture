@@ -14,6 +14,9 @@ namespace Services.Repository
 
         public void DeleteUser(long id)
         {
+            UserProfile userProfile = applicationDbContext.UserProfiles.Find(id);
+            applicationDbContext.UserProfiles.Remove(userProfile);
+
             User user = applicationDbContext.Users.Find(id);
             applicationDbContext.Users.Remove(user);
             applicationDbContext.SaveChanges();
