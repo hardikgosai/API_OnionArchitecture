@@ -113,28 +113,29 @@ namespace Getri_API_OnionArchitecture.Controllers
             List<User> lstUser = new List<User>();
             var lstUsers = iUserRepository.GetUsers().ToList();
 
+            List<ListUserDTO> lstUserDTO = new List<ListUserDTO>();
+
             foreach (var item in lstUsers)
             {
-                User user = new User();
+                ListUserDTO user = new ListUserDTO();
                 UserProfile userProfile = iUserProfileRepository.GetUserProfile(item.Id);
                 user.Id = item.Id;
                 user.UserName = item.UserName;
                 user.Password = item.Password;
                 user.Email = item.Email;
                 user.ModifiedDate = item.ModifiedDate;
-                user.IPAddress = item.IPAddress;
-                user.Profile = new UserProfile();
-                user.Profile.Id = userProfile.Id;
-                user.Profile.FirstName = userProfile.FirstName;
-                user.Profile.LastName = userProfile.LastName;
-                user.Profile.Address = userProfile.Address;
-                user.Profile.ContactNo = userProfile.ContactNo;
-                user.Profile.ModifiedDate = userProfile.ModifiedDate;
-                user.Profile.IPAddress = userProfile.IPAddress;
-                lstUser.Add(user);
+                user.IPAddress = item.IPAddress;                
+                user.Id = userProfile.Id;
+                user.Firstname = userProfile.FirstName;
+                user.Lastname = userProfile.LastName;
+                user.Address = userProfile.Address;
+                user.ContactNo = userProfile.ContactNo;
+                user.ModifiedDate = userProfile.ModifiedDate;
+                user.IPAddress = userProfile.IPAddress;
+                lstUserDTO.Add(user);
             }
 
-            return Ok(lstUser);
+            return Ok(lstUserDTO);
         }
     }    
 }
